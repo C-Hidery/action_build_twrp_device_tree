@@ -38,7 +38,7 @@ jobs:
     
     - name: Download recovery image
       run: |
-        curl -L -o recovery.zip "${{ github.event.inputs.IMG_URL }}"
+        wget -O recovery.zip "${{ github.event.inputs.IMG_URL }}"
         file recovery.zip || true  # Display file info for debugging
     - name: Unzip
       run: |
