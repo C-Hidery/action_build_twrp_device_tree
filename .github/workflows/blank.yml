@@ -35,12 +35,15 @@ jobs:
     - name: Install TWRP generator
       run: |
         pip3 install --upgrade twrpdtgen
-        
+    
     - name: Download recovery image
       run: |
-        curl -L -o recovery.img "${{ github.event.inputs.IMG_URL }}"
-        file recovery.img || true  # Display file info for debugging
-      
+        curl -L -o recovery.zip "${{ github.event.inputs.IMG_URL }}"
+        file recovery.zip || true  # Display file info for debugging
+    - name: Unzip
+      run: |
+        unzip recovery.zip
+        mv recovery_orig.img recovery.img
     - name: Generate device tree
       run: |
         mkdir -p device_tree_output
